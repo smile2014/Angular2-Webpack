@@ -1,0 +1,32 @@
+<fieldset>
+    <div class="col-sm-12">
+        <legend>Github User Repos Search</legend>
+    </div>
+    <div class="col-sm-4">
+        <form [formGroup]="form" (ngSubmit)="submit(form.value)">
+            <label for="userName">UserName</label>
+            <input type="text" class="form-control input-sm" formControlName="userName"><br>
+            <p *ngIf="form.controls.userName.errors">This field is required!</p>
+            <button class="btn btn-sm btn-primary">Find Repos</button>
+        </form>
+        <hr>
+        <pre>{{form.value | json}}</pre>
+    </div>
+    <div class="col-sm-6">
+        <ul>
+            <li *ngFor="let repo of githubRepos">
+                <div>
+                   <a [href]="repo.html_url" target="_blank">{{repo.full_name}}</a><br/>
+                    <small>{{repo.description}}</small>
+                    <p>
+                        <i class="fa fa-binoculars"></i> {{repo.stargazers_count}}<br/>
+                        <i class="fa fa-star"></i> {{repo.watchers_count}}
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="col-sm-2">
+        <img *ngIf="avatarUrl" [src]="avatarUrl" alt="User Avatar" class="img-responsive img-thumbnail">
+    </div>
+</fieldset>
