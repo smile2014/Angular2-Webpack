@@ -9,6 +9,10 @@ export class GithubReposService {
     getRepos(userName: string): Promise<Github[]> {
         return this.apiService.get(`users/${userName}/repos`);
     }
+
+    getUser(userName: string): Promise<GithubUser> {
+        return this.apiService.get(`users/${userName}`);
+    }
 }
 
 export class Github {
@@ -23,4 +27,13 @@ export class Github {
 class GithubOwner {
     login: string;
     avatar_url: string;
+}
+
+export class GithubUser {
+    name: string;
+    login: string;
+    avatar_url: string;
+    followers: number;
+    following: number;
+    public_gists: number;
 }
